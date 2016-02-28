@@ -71,8 +71,8 @@ public class LoginActivity extends Activity implements OnClickListener{
 	}
 	
 	private void loginSuccessful(){
-		GeneralUtil.saveString(this, Contanst.USER_NAME, userNameServer);
-		GeneralUtil.saveBoolean(this, Contanst.IS_LOGIN, true);
+		GeneralUtil.saveString(this, Contanst.Shareference.USER_NAME, userNameServer);
+		GeneralUtil.saveBoolean(this, Contanst.Shareference.IS_LOGIN, true);
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		GeneralUtil.beginStartActivityAnimation(this);

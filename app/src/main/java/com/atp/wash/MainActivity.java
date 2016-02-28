@@ -30,13 +30,13 @@ import android.view.Window;
 import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initActionBar();
+//        initActionBar();
 		initMainView();
     }
 
@@ -47,23 +47,24 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void initActionBar() {
-		View actionBarView = (View) LayoutInflater.from(this).inflate(
-				R.layout.item_action_bar, null);
-
-//		getSupportActionBar()
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(actionBarView);
+//		View actionBarView = (View) LayoutInflater.from(this).inflate(
+//				R.layout.item_action_bar, null);
+//
+////		getSupportActionBar()
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setTitle(getString(R.string.txt_atp_title));
+//		getSupportActionBar().set
 		
-		TextView mTvTitle = (TextView) actionBarView.findViewById(R.id.txt_title);
-		mTvTitle.setText(GeneralUtil.getString(this, Contanst.USER_NAME, "ATP"));
-		mTvTitle.setOnLongClickListener(new OnLongClickListener() {
-			
-			@Override
-			public boolean onLongClick(View arg0) {
-				showDialogAccount();
-				return false;
-			}
-		});
+//		TextView mTvTitle = (TextView) actionBarView.findViewById(R.id.txt_title);
+//		mTvTitle.setText(GeneralUtil.getString(this, Contanst.USER_NAME, "ATP"));
+//		mTvTitle.setOnLongClickListener(new OnLongClickListener() {
+//
+//			@Override
+//			public boolean onLongClick(View arg0) {
+//				showDialogAccount();
+//				return false;
+//			}
+//		});
 	}
 	
 	private void showDialogAccount(){

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.text.DecimalFormat;
+
 
 public class GeneralUtil {
 	
@@ -94,6 +96,19 @@ public class GeneralUtil {
 	public static void beginFinishActivityAnimation(Context context) {
 		((Activity) context).overridePendingTransition(R.anim.move_right_out,
 				R.anim.move_left_in);
+	}
+
+	public static boolean checkWSIsActivated(Context mContext, String whichWS){
+		return getBoolean(mContext,whichWS,false);
+	}
+
+	public static void saveStateWS(Context mContext, String whichWS, boolean value){
+		saveBoolean(mContext, whichWS, value);
+	}
+
+	public static String formatPrice(long price){
+		String formattedPrice = new DecimalFormat("##,### đ").format(price);
+		return formattedPrice;
 	}
 
 }

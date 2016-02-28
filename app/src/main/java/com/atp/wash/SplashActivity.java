@@ -55,7 +55,7 @@ public class SplashActivity extends Activity {
 	}
 	
 	private boolean checkLogin(){
-		if(GeneralUtil.getBoolean(this, Contanst.IS_LOGIN, false)){
+		if(GeneralUtil.getBoolean(this, Contanst.Shareference.IS_LOGIN, false)){
 			return true;
 		}
 		return false;

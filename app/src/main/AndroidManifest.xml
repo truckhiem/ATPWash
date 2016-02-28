@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.atp.wash" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".application.ATPApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,6 +27,7 @@
         <activity
             android:name=".LoginActivity">
         </activity>
+        <activity android:name=".WashingDetailActivity"/>
     </application>
 
 </manifest>

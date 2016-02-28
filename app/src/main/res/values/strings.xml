@@ -26,8 +26,29 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
+    <string name="api_key">kid_-JOmYCvj0l</string>
+    <string name="api_secret">16e0d50b09e04d81bbaf13d743e508b8</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="txt_atp_title">QUẢN LÝ PHÒNG GIẶT - ATP</string>
+    <string name="txt_ok">OK</string>
+    <string name="txt_cancel">Bỏ qua</string>
+    <string name="txt_avoid">Huỷ bỏ</string>
+    <string name="txt_more_washing">Nước giặt thêm</string>
+    <string name="txt_more_softner">Nước xả thêm</string>
+    <string name="txt_update">Cập nhật</string>
+    <string name="txt_name_customer">Tên khách hàng</string>
+    <string name="txt_more_info">Thông tin thêm</string>
+    <string name="txt_total">Tổng tiền</string>
+    <string name="txt_machine">Tiền giặt</string>
+    <string name="txt_machine_dry">Sấy khô</string>
+    <string name="txt_active_machine">Kích hoạt</string>
+
+    <string name="text_active_ws">Bạn muốn kích hoạt máy số %s</string>
+    <string name="text_ws_finish">Máy số %s đã xong</string>
+    <string name="text_ws_running">Máy số %s đang hoạt động</string>
+
+
 </resources>
