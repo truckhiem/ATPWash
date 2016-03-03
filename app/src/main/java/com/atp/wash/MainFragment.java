@@ -17,15 +17,18 @@ import android.widget.TextView;
 import com.atp.wash.application.ATPApplication;
 import com.atp.wash.models.WashingMachineItem;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 /**
  * Created by khiem on 2/25/16.
  */
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class MainFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener{
     private View rootView;
     private ImageView ws1, ws2, ws3, ws4, ws5, ws6, ws7, ws8;
+    private ArrayList<ImageView> lstImgView;
     private Context mContext;
     private WashingMachineItem machineSelected;
 
@@ -47,6 +50,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initView() {
+        lstImgView = new ArrayList<>();
         ws1 = (ImageView) rootView.findViewById(R.id.ws_1);
         ws2 = (ImageView) rootView.findViewById(R.id.ws_2);
         ws3 = (ImageView) rootView.findViewById(R.id.ws_3);
@@ -56,25 +60,20 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         ws7 = (ImageView) rootView.findViewById(R.id.ws_7);
         ws8 = (ImageView) rootView.findViewById(R.id.ws_8);
 
-        ws1.setTag(0);
-        ws2.setTag(1);
-        ws3.setTag(2);
-        ws4.setTag(3);
-        ws5.setTag(4);
-        ws6.setTag(5);
-        ws7.setTag(6);
-        ws8.setTag(7);
+        lstImgView.add(ws1);
+        lstImgView.add(ws2);
+        lstImgView.add(ws3);
+        lstImgView.add(ws4);
+        lstImgView.add(ws5);
+        lstImgView.add(ws6);
+        lstImgView.add(ws7);
+        lstImgView.add(ws8);
 
-        ws1.setOnClickListener(this);
-        ws2.setOnClickListener(this);
-        ws3.setOnClickListener(this);
-        ws4.setOnClickListener(this);
-        ws5.setOnClickListener(this);
-        ws6.setOnClickListener(this);
-        ws7.setOnClickListener(this);
-        ws8.setOnClickListener(this);
-
-
+        for (int i = 0; i < 8; i++) {
+            lstImgView.get(i).setTag(i);
+            lstImgView.get(i).setOnClickListener(this);
+            lstImgView.get(i).setOnLongClickListener(this);
+        }
     }
 
     @Override
@@ -117,7 +116,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mDialog.show();
     }
 
-    private void startDialogFinish(int WSJustFinish){
+    private void startDialogFinish(){
         final Dialog mDialog = new Dialog(mContext,android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
         mDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         mDialog.setContentView(R.layout.dialog_layout);
@@ -205,31 +204,64 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         machineSelected = null;
     }
     private void setMachineSelected(int numberMachine){
-        switch (numberMachine) {
-            case 0:
-                ws1.setImageResource(R.drawable.washing_machine);
-                break;
-            case 1:
-                ws2.setImageResource(R.drawable.washing_machine);
-                break;
-            case 2:
-                ws3.setImageResource(R.drawable.washing_machine);
-                break;
-            case 3:
-                ws4.setImageResource(R.drawable.washing_machine);
-                break;
-            case 4:
-                ws5.setImageResource(R.drawable.washing_machine);
-                break;
-            case 5:
-                ws6.setImageResource(R.drawable.washing_machine);
-                break;
-            case 6:
-                ws7.setImageResource(R.drawable.washing_machine);
-                break;
-            case 7:
-                ws8.setImageResource(R.drawable.washing_machine);
-                break;
-        }
+        lstImgView.get(numberMachine).setImageResource(R.drawable.washing_machine);
+//        switch (numberMachine) {
+//            case 0:
+//                ws1.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 1:
+//                ws2.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 2:
+//                ws3.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 3:
+//                ws4.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 4:
+//                ws5.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 5:
+//                ws6.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 6:
+//                ws7.setImageResource(R.drawable.washing_machine);
+//                break;
+//            case 7:
+//                ws8.setImageResource(R.drawable.washing_machine);
+//                break;
+//        }
+    }
+
+    private void startDialogError(){
+        final Dialog mDialog = new Dialog(mContext,android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
+        mDialog.setContentView(R.layout.dialog_error_layout);
+
+        Button btnCancel = (Button) mDialog.findViewById(R.id.btn_cancel_dialog);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        Button btnOK = (Button) mDialog.findViewById(R.id.btn_ok_dialog);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+
+        TextView txtTitle = (TextView) mDialog.findViewById(R.id.txt_title);
+        txtTitle.setText(String.format(getString(R.string.text_title_error),machineSelected.getMachineNumber()));
+
+        mDialog.show();
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        machineSelected = getWSJustSelected((int) v.getTag());
+        startDialogError();
+        return true;
     }
 }

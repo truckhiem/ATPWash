@@ -49,6 +49,9 @@
     <string name="text_active_ws">Bạn muốn kích hoạt máy số %s</string>
     <string name="text_ws_finish">Máy số %s đã xong</string>
     <string name="text_ws_running">Máy số %s đang hoạt động</string>
+    <string name="text_unactivate">Không thể kích hoạt máy</string>
+    <string name="text_another_error">Lỗi khác</string>
+    <string name="text_title_error">Báo cáo sự cố máy số %s</string>
 
 
 </resources>
