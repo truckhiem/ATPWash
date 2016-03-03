@@ -1,4 +1,4 @@
-package com.atp.wash;
+package com.atp.wash.utils;
 
 public class Contanst {
 	public static final int TOTAL_MACHINE = 8;
@@ -20,6 +20,7 @@ public class Contanst {
 		public static final String PASSWORD = "PASSWORD";
 		public static final String LIST_MACHINE_STATUS = "LIST_MACHINE_STATUS";
 		public static final String LIST_MACHINE_UNSAVE = "LIST_MACHINE_UNSAVE";
+		public static final String LIST_MACHINE_ERROR_UNSAVE = "LIST_MACHINE_ERROR_UNSAVE";
 	}
 
 	public static class ActivateMachine{

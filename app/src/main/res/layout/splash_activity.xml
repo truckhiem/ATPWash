@@ -5,7 +5,7 @@
     android:orientation="vertical" 
     android:gravity="center">
     
-   <com.atp.wash.CustomCircle
+   <com.atp.wash.Customs.CustomCircle
     android:id="@+id/circle"
     android:layout_width="300dp"
     android:layout_height="300dp"

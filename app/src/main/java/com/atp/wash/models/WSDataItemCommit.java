@@ -7,7 +7,16 @@ import com.kinvey.java.model.KinveyMetaData;
 /**
  * Created by khiem on 2/28/16.
  */
-public class SaveInfo extends GenericJson{
+public class WSDataItemCommit extends GenericJson{
+
+    @Key
+    private boolean isAnotherError = false;
+    @Key
+    private boolean unActivate = false;
+    @Key
+    private boolean isError = false;
+    @Key
+    private String errorReason = "";
     @Key
     private int machineNumber;
     @Key
@@ -31,7 +40,7 @@ public class SaveInfo extends GenericJson{
     @Key("_acl")
     private KinveyMetaData.AccessControlList acl;
 
-    public SaveInfo(){}
+    public WSDataItemCommit(){}
 
     public int getMachineNumber() {
         return machineNumber;
@@ -103,5 +112,37 @@ public class SaveInfo extends GenericJson{
 
     public void setTotalPrice(long totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setIsError(boolean isError) {
+        this.isError = isError;
+    }
+
+    public String getErrorReason() {
+        return errorReason;
+    }
+
+    public void setErrorReason(String errorReason) {
+        this.errorReason = errorReason;
+    }
+
+    public boolean isUnActivate() {
+        return unActivate;
+    }
+
+    public void setUnActivate(boolean unActivate) {
+        this.unActivate = unActivate;
+    }
+
+    public boolean isAnotherError() {
+        return isAnotherError;
+    }
+
+    public void setIsAnotherError(boolean isAnotherError) {
+        this.isAnotherError = isAnotherError;
     }
 }

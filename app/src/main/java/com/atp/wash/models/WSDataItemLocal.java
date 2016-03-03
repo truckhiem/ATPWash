@@ -1,17 +1,13 @@
 package com.atp.wash.models;
 
-import com.atp.wash.Contanst;
-import com.atp.wash.GeneralUtil;
-import com.google.api.client.json.GenericJson;
-import com.google.api.client.util.Key;
-import com.kinvey.java.model.KinveyMetaData;
+import com.atp.wash.utils.Contanst;
 
 import java.io.Serializable;
 
 /**
  * Created by khiem on 2/27/16.
  */
-public class WashingMachineItem implements Serializable{
+public class WSDataItemLocal implements Serializable{
     private int machineNumber;
     private String custName = "";
     private String custInfo = "";
@@ -20,9 +16,14 @@ public class WashingMachineItem implements Serializable{
     private boolean isDry = false;
     private boolean isActive = false;
 
-    public WashingMachineItem(){}
+    private boolean isError = false;
+    private boolean isAnotherError = false;
+    private boolean unActivate = false;
+    private String errorReason = "";
 
-    public WashingMachineItem(int machineNumber){
+    public WSDataItemLocal(){}
+
+    public WSDataItemLocal(int machineNumber){
         this.machineNumber = machineNumber;
     }
 
@@ -112,5 +113,37 @@ public class WashingMachineItem implements Serializable{
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setIsError(boolean isError) {
+        this.isError = isError;
+    }
+
+    public String getErrorReason() {
+        return errorReason;
+    }
+
+    public void setErrorReason(String errorReason) {
+        this.errorReason = errorReason;
+    }
+
+    public boolean isUnActivate() {
+        return unActivate;
+    }
+
+    public void setUnActivate(boolean unActivate) {
+        this.unActivate = unActivate;
+    }
+
+    public boolean isAnotherError() {
+        return isAnotherError;
+    }
+
+    public void setIsAnotherError(boolean isAnotherError) {
+        this.isAnotherError = isAnotherError;
     }
 }

@@ -1,4 +1,4 @@
-package com.atp.wash;
+package com.atp.wash.Customs;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,6 +10,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.atp.wash.R;
 
 public class CustomCircle extends View {
 

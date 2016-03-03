@@ -15,7 +15,9 @@
   -->
 
 <resources>
-    <string name="app_name">Navigation Drawer Example</string>
+    <string name="app_name">ATP</string>
+    <string name="kinvey_collection_machine">MachineManage</string>
+    <string name="kinvey_collection_error">MachineError</string>
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>
@@ -52,6 +54,6 @@
     <string name="text_unactivate">Không thể kích hoạt máy</string>
     <string name="text_another_error">Lỗi khác</string>
     <string name="text_title_error">Báo cáo sự cố máy số %s</string>
-
+    <string name="text_machine_error">Máy số %s đang bị lỗi, bạn có muốn test thử máy không?</string>
 
 </resources>

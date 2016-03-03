@@ -28,6 +28,7 @@
             android:name=".LoginActivity">
         </activity>
         <activity android:name=".WashingDetailActivity"/>
+        <activity android:name=".TestWashingMachineActivity"/>
     </application>
 
 </manifest>

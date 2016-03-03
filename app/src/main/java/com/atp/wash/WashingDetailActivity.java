@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.atp.wash.application.ATPApplication;
-import com.atp.wash.models.WashingMachineItem;
+import com.atp.wash.models.WSDataItemLocal;
+import com.atp.wash.utils.Contanst;
+import com.atp.wash.utils.GeneralUtil;
 
 /**
  * Created by khiem on 2/26/16.
@@ -20,7 +22,7 @@ public class WashingDetailActivity extends Activity implements View.OnClickListe
     private TextView mTxtTotalPrice, mTxtNumWashing, mTxtNumSoftner, mTxtTotalWashing, mTxtTotalSoftner, mTxtTotalDry;
     private EditText mInputCustName, mInputCustInfo;
     private Button btnIncreaseWashing, btnDecreaseWashing, btnIncreaseSoftner, btnDecreaseSoftner, btnOk, btnCancel;
-    private WashingMachineItem wsItem;
+    private WSDataItemLocal wsItem;
     private CheckBox mChkIsDry;
 
 
@@ -35,7 +37,7 @@ public class WashingDetailActivity extends Activity implements View.OnClickListe
 
     private void getDataIntent() {
         Bundle bundle = getIntent().getExtras();
-        wsItem = (WashingMachineItem) bundle.get(Contanst.ExtraIntent.INTENT_WS_ITEM);
+        wsItem = (WSDataItemLocal) bundle.get(Contanst.ExtraIntent.INTENT_WS_ITEM);
     }
 
     private void bindingData() {

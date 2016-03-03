@@ -8,6 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.atp.wash.utils.Contanst;
+import com.atp.wash.utils.GeneralUtil;
+
 public class LoginActivity extends Activity implements OnClickListener{
 
 	private String userNameServer;

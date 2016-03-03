@@ -1,6 +1,5 @@
-package com.atp.wash;
+package com.atp.wash.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -11,16 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.atp.wash.R;
+import com.atp.wash.WashingDetailActivity;
 import com.atp.wash.application.ATPApplication;
-import com.atp.wash.models.WashingMachineItem;
-
-import org.w3c.dom.Text;
+import com.atp.wash.models.WSErrorDataItemCommit;
+import com.atp.wash.models.WSDataItemLocal;
+import com.atp.wash.models.WSErrorDataItemLocal;
+import com.atp.wash.utils.Contanst;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by khiem on 2/25/16.
@@ -30,7 +33,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
     private ImageView ws1, ws2, ws3, ws4, ws5, ws6, ws7, ws8;
     private ArrayList<ImageView> lstImgView;
     private Context mContext;
-    private WashingMachineItem machineSelected;
+    private WSDataItemLocal machineSelected;
 
     public MainFragment() {
         // Empty constructor required for fragment subclasses
@@ -78,16 +81,39 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
 
     @Override
     public void onClick(View v) {
-
         machineSelected = getWSJustSelected((int) v.getTag());
-        if(machineSelected.isActive()){
+        if(machineSelected.isError()){
+            startDialogMachineError();
+        }else if(machineSelected.isActive()){
             startDialogWarning();
         }else{
             startDialogActivate();
         }
+    }
 
-//        startDialogFinish(1);
+    private void startDialogMachineError(){
+        final Dialog mDialog = new Dialog(mContext,android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
+        mDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        mDialog.setContentView(R.layout.dialog_layout);
 
+        TextView mTxtDialog = (TextView) mDialog.findViewById(R.id.txt_dialog);
+        mTxtDialog.setText(String.format(getString(R.string.text_machine_error), machineSelected.getMachineNumber()));
+
+        Button btnCancel = (Button) mDialog.findViewById(R.id.btn_cancel_dialog);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        Button btnOK = (Button) mDialog.findViewById(R.id.btn_ok_dialog);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        mDialog.show();
     }
 
     private void startDialogActivate(){
@@ -184,7 +210,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
         mContext.startActivity(mIntent);
     }
 
-    private WashingMachineItem getWSJustSelected(int numberMachine){
+    private WSDataItemLocal getWSJustSelected(int numberMachine){
         return ATPApplication.getInstance().getListMachine().get(numberMachine);
     }
 
@@ -195,7 +221,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
     }
 
     private void refeshView() {
-        ArrayList<WashingMachineItem> lstMachine =  ATPApplication.getInstance().getListMachine();
+        ArrayList<WSDataItemLocal> lstMachine =  ATPApplication.getInstance().getListMachine();
         for (int i = 0; i < lstMachine.size(); i++) {
             if(lstMachine.get(i).isActive()){
                 setMachineSelected(i);
@@ -205,37 +231,15 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
     }
     private void setMachineSelected(int numberMachine){
         lstImgView.get(numberMachine).setImageResource(R.drawable.washing_machine);
-//        switch (numberMachine) {
-//            case 0:
-//                ws1.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 1:
-//                ws2.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 2:
-//                ws3.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 3:
-//                ws4.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 4:
-//                ws5.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 5:
-//                ws6.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 6:
-//                ws7.setImageResource(R.drawable.washing_machine);
-//                break;
-//            case 7:
-//                ws8.setImageResource(R.drawable.washing_machine);
-//                break;
-//        }
     }
 
     private void startDialogError(){
         final Dialog mDialog = new Dialog(mContext,android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
         mDialog.setContentView(R.layout.dialog_error_layout);
+
+        final CheckBox chkUnActivate = (CheckBox) mDialog.findViewById(R.id.chk_un_activate);
+        final CheckBox chkAnotherError = (CheckBox) mDialog.findViewById(R.id.chk_another_error);
+        final EditText inputStrError = (EditText) mDialog.findViewById(R.id.input_str_error);
 
         Button btnCancel = (Button) mDialog.findViewById(R.id.btn_cancel_dialog);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +252,17 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!chkAnotherError.isChecked() && !chkUnActivate.isChecked()) {
+                    machineSelected.setIsError(false);
+                } else {
+                    WSErrorDataItemLocal saveItem = new WSErrorDataItemLocal();
+                    saveItem.setMachineNumber(machineSelected.getMachineNumber());
+                    saveItem.setErrorReason(inputStrError.getText().toString());
+                    saveItem.setIsAnotherError(chkAnotherError.isChecked());
+                    saveItem.setIsError(true);
+                    saveItem.setUnActivate(chkUnActivate.isChecked());
+                    ATPApplication.getInstance().commitMachineError(saveItem, true);
+                }
                 mDialog.dismiss();
             }
         });
@@ -261,7 +276,11 @@ public class MainFragment extends Fragment implements View.OnClickListener, View
     @Override
     public boolean onLongClick(View v) {
         machineSelected = getWSJustSelected((int) v.getTag());
-        startDialogError();
+        if(machineSelected.isError()){
+            startDialogMachineError();
+        }else {
+            startDialogError();
+        }
         return true;
     }
 }

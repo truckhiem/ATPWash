@@ -1,8 +1,10 @@
-package com.atp.wash;
+package com.atp.wash.utils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.atp.wash.R;
 
 import java.text.DecimalFormat;
 

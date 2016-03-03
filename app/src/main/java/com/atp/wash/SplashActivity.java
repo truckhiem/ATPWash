@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 
+import com.atp.wash.Customs.CircleAngleAnimation;
+import com.atp.wash.Customs.CustomCircle;
+import com.atp.wash.utils.Contanst;
+import com.atp.wash.utils.GeneralUtil;
+
 
 public class SplashActivity extends Activity {
 

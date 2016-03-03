@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.TextView;
+import com.atp.wash.fragment.MainFragment;
 
 
 public class MainActivity extends Activity {
